@@ -14,7 +14,7 @@ namespace NowYouSleep
         private ConfigEntry<bool> _debugModeEnabled;
 
         internal const string PluginGuid = "hex.nowyousleep";
-        internal const string PluginName = "Now You Sleep";
+        internal const string PluginName = "NowYouSleep";
         internal const string PluginVersion = "1.0.0";
 
         internal static Plugin Instance { get; private set; }
