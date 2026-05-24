@@ -15,10 +15,11 @@ namespace NowYouSleep
 
         internal const string PluginGuid = "hex.nowyousleep";
         internal const string PluginName = "NowYouSleep";
-        internal const string PluginVersion = "1.0.0";
+        internal const string PluginVersion = "1.0.1";
 
         internal static Plugin Instance { get; private set; }
         internal static ManualLogSource Log { get; private set; }
+
         internal bool IsNowYouSleepEnabled => _modEnabled != null && _modEnabled.Value;
         internal bool IsDebugModeEnabled => _debugModeEnabled != null && _debugModeEnabled.Value;
 
@@ -42,28 +43,23 @@ namespace NowYouSleep
             _harmony = new Harmony(PluginGuid);
             _harmony.PatchAll();
 
-            Log.LogInfo($"v{PluginVersion} loaded.");
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded.");
         }
 
         private void OnDestroy()
         {
-            if(_harmony != null)
-            {
-                _harmony.UnpatchSelf();
-                _harmony = null;
-            }
+            Log.LogInfo($"{PluginName} v{PluginVersion} unloaded.");
 
-            Log.LogInfo($"v{PluginVersion} unloaded.");
-
+            _harmony?.UnpatchSelf();
+            _harmony = null;
             Instance = null;
-            
         }
 
         internal void LogDebug(string message)
         {
             if (IsDebugModeEnabled)
             {
-                Log.LogInfo(message);
+                Log.LogInfo($"[Debug] {message}");
             }
         }
     }
@@ -79,11 +75,15 @@ namespace NowYouSleep
                 return true;
             }
 
-            Plugin.Instance.LogDebug("Sleep check running...");
-
             if (ZNet.instance == null)
             {
                 Plugin.Instance.LogDebug("ZNet.instance is null. Falling back to vanilla sleep check.");
+                return true;
+            }
+
+            if (!ZNet.instance.IsServer())
+            {
+                Plugin.Instance.LogDebug("Not running on server. Falling back to vanilla sleep check.");
                 return true;
             }
 
@@ -91,25 +91,21 @@ namespace NowYouSleep
 
             if (allCharacterZdos == null || allCharacterZdos.Count == 0)
             {
-                Plugin.Instance.LogDebug("No character ZDOs found. Returning false.");
-                __result = false;
-                return false;
+                return true;
             }
-
-            Plugin.Instance.LogDebug($"ZDO count: {allCharacterZdos.Count}");
 
             foreach (ZDO zdo in allCharacterZdos)
             {
                 if (zdo.GetBool(ZDOVars.s_inBed, false))
                 {
                     Plugin.Instance.LogDebug("At least one player is trying to sleep. Allowing sleep skip.");
+
                     __result = true;
                     return false;
                 }
             }
 
-            __result = false;
-            return false;
+            return true;
         }
     }
 }
