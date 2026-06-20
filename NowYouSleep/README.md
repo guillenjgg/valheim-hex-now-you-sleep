@@ -1,6 +1,6 @@
 # NowYouSleep
 
-Allows night to pass when at least one player is sleeping in Valheim multiplayer.
+Similar to Enshrouded's sleep mechanic, NowYouSleep allows night to pass when at least one player is sleeping in Valheim multiplayer.
 
 In vanilla multiplayer, every player must sleep before the night can be skipped.  
 NowYouSleep changes that behavior so a single sleeping player can trigger Valheim's normal sleep-to-morning transition.
@@ -94,3 +94,11 @@ Enabled = true
 # Default value: false
 DebugMode = false
 ```
+
+## Support and Feedback
+Report bugs, request features, or provide feedback:
+
+- Discord: https://discord.gg/wU2FXD94v4
+
+## Github
+- Source code: https://github.com/guillenjgg/valheim-hex-now-you-sleep

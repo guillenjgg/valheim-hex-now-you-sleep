@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.2
+- Add Discord support link
+
 ## v1.0.1
 
 - Improved multiplayer architecture with explicit server-authoritative sleep handling

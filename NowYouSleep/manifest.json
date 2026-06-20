@@ -1,7 +1,7 @@
 {
   "name": "NowYouSleep",
-  "version_number": "1.0.1",
-  "website_url": "https://github.com/guillenjgg/valheim-hex-now-you-sleep",
+  "version_number": "1.0.2",
+  "website_url": "https://discord.gg/wU2FXD94v4",
   "description": "Allows night to pass when at least one player is sleeping.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2333"
