@@ -15,7 +15,7 @@ namespace NowYouSleep
 
         internal const string PluginGuid = "hex.nowyousleep";
         internal const string PluginName = "NowYouSleep";
-        internal const string PluginVersion = "1.0.1";
+        internal const string PluginVersion = "1.0.2";
 
         internal static Plugin Instance { get; private set; }
         internal static ManualLogSource Log { get; private set; }
@@ -53,6 +53,7 @@ namespace NowYouSleep
             _harmony?.UnpatchSelf();
             _harmony = null;
             Instance = null;
+            Log = null;
         }
 
         internal void LogDebug(string message)
