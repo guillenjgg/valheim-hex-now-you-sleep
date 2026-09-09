@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.0.3
+- Update for 1.0 release
+
 ## v1.0.2
 - Add Discord support link
 
