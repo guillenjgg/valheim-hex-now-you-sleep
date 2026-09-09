@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace NowYouSleep
 {
@@ -15,7 +16,7 @@ namespace NowYouSleep
 
         internal const string PluginGuid = "hex.nowyousleep";
         internal const string PluginName = "NowYouSleep";
-        internal const string PluginVersion = "1.0.2";
+        internal const string PluginVersion = "1.0.3";
 
         internal static Plugin Instance { get; private set; }
         internal static ManualLogSource Log { get; private set; }
@@ -40,8 +41,9 @@ namespace NowYouSleep
                 false,
                 $"Whether to enable debug logging for {PluginName}.");
 
+            Assembly assembly = Assembly.GetExecutingAssembly();
             _harmony = new Harmony(PluginGuid);
-            _harmony.PatchAll();
+            _harmony.PatchAll(assembly);
 
             Log.LogInfo($"{PluginName} v{PluginVersion} loaded.");
         }
